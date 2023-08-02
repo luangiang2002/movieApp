@@ -26,25 +26,21 @@ const SingUp = () => {
         if (Object.keys(error).length === 0 && value.email !== '' && value.pass !== '' && value.confirmPass !== '') {
             createUserWithEmailAndPassword(auth, value.email, value.pass, value.confirmPass)
                 .then(data => {
-                    console.log(data, 'authdata');
-                    // if (typeof errorButton !== 'string') {
-                        toast.success(`Đăng kí thành công,Đang trở về trang đang nhập`,
-                            {
-                                autoClose: 4000,
-                                position: "top-left"
-                            })
-                        setTimeout(() => {
-                            navigate('/login');
-                        }, 5000);
-                    // }
+                    toast.success(`Đăng kí thành công,Đang trở về trang đang nhập`,
+                        {
+                            autoClose: 4000,
+                            position: "top-left"
+                        })
+                    setTimeout(() => {
+                        navigate('/login');
+                    }, 5000);
                 })
                 .catch(er => {
-                    // console.log(er.code);
                     if (er.code === 'auth/email-already-in-use') {
                         setErrorButton('Email đã tồn tại')
                     }
                 })
-           
+
 
         }
     }
@@ -73,13 +69,8 @@ const SingUp = () => {
                     Object.keys(error).length === 0 && errorButton
                 }</span>
                 <button type='submit' onClick={hamdleSubmit}>Sign up</button>
-
-                <div className="signup_form_google">
-                    <button>Sign in with Google</button>
-
-                </div>
                 <div className="signup_form_gignup">
-                    <p>Already have an account ? <Link to='/'>Sign in</Link></p>
+                    <p>Already have an account ? <Link to='/login'>Sign in</Link></p>
                 </div>
             </form>
         </div>
