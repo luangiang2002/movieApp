@@ -1,14 +1,11 @@
 @import '../../../index.scss';
 
 .search {
-    display: block;
+    display: grid;
     margin-bottom: 10px;
     margin-right: 10px;
     &_video {
-       
-
-        
-
+       padding: 0 15px 0 30px;
         &--duration {
             img {
                 width: 100%;

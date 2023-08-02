@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom'
 const Search = ({ video }) => {
     const navigate = useNavigate()
     const channeId = video?.snippet?.channelId
+    const VideoId = video?.id?.videoId
     const handleVideoClick = () => {
-        navigate(`homevideo/${channeId}`)
+        navigate(`/homevideo/${VideoId}`)
     }
     const handleChannel = () => {
         navigate(`/channel/${channeId}`)
