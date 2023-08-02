@@ -8,11 +8,21 @@
     padding: 20px;
 
     &_form {
+
         h1 {
             margin: 10px 0;
             text-align: center;
         }
+        &--icon{
+            position: relative;
 
+            svg{
+                position: absolute;
+                right: 5%;
+                top: 18%;
+                font-size: 20px;
+            }
+        }
         input {
             height: 35px;
             margin-bottom: 20px;
@@ -31,6 +41,15 @@
             background-color: #4ea8de;
             margin: 10px 0;
             color: white;
+        }
+        span{
+            color: red;
+            margin-top: -15px;
+            display: block;
+            &:nth-child(1){
+                margin-bottom: 10px;
+                display: block;
+            }
         }
     }
 

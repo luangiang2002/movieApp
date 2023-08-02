@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { auth, db } from '../firebase/fibefire';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 const Login = () => {
     const navigate = useNavigate();
     const [value, setValue] = useState({
@@ -38,7 +39,7 @@ const Login = () => {
                 });
 
                 setTimeout(() => {
-                    navigate('/login');
+                    navigate('/');
                 }, 5000);
 
                 const userRef = collection(db, 'users');
@@ -47,7 +48,7 @@ const Login = () => {
                     accessToken: data.user.accessToken,
                 };
 
-                sessionStorage.setItem('watch-user', JSON.stringify(userInfo));
+                localStorage.setItem('watch-user', JSON.stringify(userInfo));
 
                 await addDoc(userRef, userInfo);
 
@@ -62,6 +63,13 @@ const Login = () => {
             }
         }
     };
+
+    const [showPassword, setShowPassword] = useState(true);
+
+    const handleTogglePassword = () => {
+      setShowPassword(prevShowPassword => !prevShowPassword);
+    };
+  
     return (
         <div className="login">
             <form className='login_form' >
@@ -73,14 +81,19 @@ const Login = () => {
                 />
                 {error.email && <span>{error.email}</span>}
                 <p>Password</p>
-                <input type="password" placeholder='Enter your password' name='pass'
-                    onChange={handleChange}
-                    value={value.pass}
-                />
-                {error.pass && <span>{error.pass}</span>}
+                <div className='login_form--icon'>
+                    <input type={showPassword ?"password" :"text" } placeholder='Enter your password'
+                     name='pass'
+                     id="toggle-password"
+                        onChange={handleChange}
+                        value={value.pass}
+                    />
+                     {showPassword ? <FaEyeSlash  onClick={handleTogglePassword}/> : <FaEye onClick={handleTogglePassword} />}
+                </div>
+                {error.pass && <span>{error.pass}</span>} <br />
                 <span>{
                     Object.keys(error).length === 1 && errorButton
-                }</span>
+                }</span> <br />
                 <Link to='/reset'>Forget passsword</Link> <br />
                 <button type="submit" onClick={handleSubmit} disabled={isSubmitting}>
                     {isSubmitting ? 'Đang đăng nhập...' : 'Đăng nhập'}
