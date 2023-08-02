@@ -52,8 +52,8 @@
 }
 
 a {
-    text-decoration: none;
-    color: #7400b8;
+    text-decoration: none !important;
+    color: #7400b8 !important;
 }
 
 @media (max-width:767px) {
