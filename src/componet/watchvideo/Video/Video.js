@@ -15,7 +15,6 @@ const Video = ({ id,video }) => {
     const dispatch=useDispatch()
     const navigate=useNavigate()
     const { comment ,loading} = useSelector(state => state.comment) 
-    const videoID=video[0]?.id?.videoId
     const channeId=video[0].snippet.channelId
     const handleComment=()=>{
 
@@ -24,14 +23,14 @@ const Video = ({ id,video }) => {
         navigate( `/channel/${channeId}`)
     }
     useEffect(() => {
-            dispatch(getComment(videoID))
-    }, [dispatch,videoID])
+            dispatch(getComment(id))
+    }, [dispatch,id])
     const _comment=comment.video
     return (
         <>
             <div className=' video'>
                 <iframe width="100%"
-                    src={`https://www.youtube.com/embed/${videoID}`}
+                    src={`https://www.youtube.com/embed/${id}`}
                     allow="fullscreen"
                     title={video[0]?.snippet?.title}
                 >

@@ -16,7 +16,6 @@ const Channel = ({ handleToggleSidebar, sidebar }) => {
    
     useEffect(() => {
         dispatch(getVideoWatch(id))
-
     }, [dispatch, id])
     return (
         <div className='channel'>

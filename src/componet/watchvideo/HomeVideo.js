@@ -5,19 +5,23 @@ import Header from '../header/Header'
 import ToggleSideBar from '../sidebar/ToggleSideBar';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideoAction } from '../../redux/action/videoAction';
+import { getVideoAction, getVideoWatch } from '../../redux/action/videoAction';
 import Video from './Video/Video';
 import NextVideo from './NextVideo/NextVideo';
 const HomeVideo = ({ handleToggleSidebar, sidebar }) => {
     const { id } = useParams()
     const dispatch = useDispatch()
-    const {video,loading}=useSelector(state=>state.videowatch.video)
-    const {videos}=useSelector(state=>state.videoDetail.videos)
-    const videoID=video[0]?.id?.videoId
-    useEffect(()=>{
-        dispatch(getVideoAction(videoID))
-    },[dispatch,videoID])
-    
+    const { video, loading } = useSelector(state => state.videowatch.video)
+    const { videos } = useSelector(state => state.videoDetail)
+    useEffect(() => {
+        dispatch(getVideoAction(id))
+    }, [dispatch, id])
+    useEffect(() => {
+        if (videos?.videos && videos.videos.length > 0) {
+            const channeId = videos.videos[0].snippet.channelId;
+            dispatch(getVideoWatch(channeId));
+        }
+    }, [videos, dispatch]);
     return (
         <div className=' homevideo'>
             <Header handleToggleSidebar={handleToggleSidebar}></Header>
@@ -25,7 +29,7 @@ const HomeVideo = ({ handleToggleSidebar, sidebar }) => {
             <Row >
                 <Col lg={8}>
                     {
-                        !loading &&video ? <Video id={id} video={video} />
+                        !loading && video ? <Video id={id} video={video} />
                             : <h6>Loading</h6>
                     }
                 </Col>
@@ -33,10 +37,10 @@ const HomeVideo = ({ handleToggleSidebar, sidebar }) => {
                     <div className='homevideo_nextvideo'>
                         {
                             !loading ?
-                            videos?.map((videoItem,i) => (
-                                <NextVideo key={i} videos={videoItem}/>
-                            ))
-                            : <h6>Loading</h6>
+                                videos?.videos?.map((videoItem, i) => (
+                                    <NextVideo key={i} videos={videoItem} />
+                                ))
+                                : <h6>Loading</h6>
                         }
                     </div>
                 </Col>
