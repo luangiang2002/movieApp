@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { authReducer } from './reducer/authReducer'
 import {  VideoCHANNEL, VideoComment, VideoDetail, VideoReducer, selectedVideoReducer } from './reducer/videoReducer'
+import { ShortReducer } from './reducer/ToggleReducer'
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     comment:VideoComment,
     videoChannel:VideoCHANNEL,
     videoDetail:VideoDetail,
+    short:ShortReducer,
 })
 
 
