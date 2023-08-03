@@ -32,7 +32,6 @@ const Login = () => {
 
             try {
                 const data = await signInWithEmailAndPassword(auth, value.email, value.pass);
-
                 toast.success(`Đăng nhập thành công`, {
                     autoClose: 4000,
                     position: 'top-left',
@@ -67,42 +66,41 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(true);
 
     const handleTogglePassword = () => {
-      setShowPassword(prevShowPassword => !prevShowPassword);
+        setShowPassword(prevShowPassword => !prevShowPassword);
     };
-  
-    return (
-        <div className="login">
-            <form className='login_form' >
-                <h1>Wecome back</h1>
-                <p>Email</p>
-                <input type="text" placeholder='Enter your email' name='email'
+return (
+    <div className="login">
+        <form className='login_form' >
+            <h1>Wecome back</h1>
+            <p>Email</p>
+            <input type="text" placeholder='Enter your email' name='email'
+                onChange={handleChange}
+                value={value.email}
+            />
+            {error.email && <span>{error.email}</span>}
+            <p>Password</p>
+            <div className='login_form--icon'>
+                <input type={showPassword ? "password" : "text"} placeholder='Enter your password'
+                    name='pass'
+                    id="toggle-password"
                     onChange={handleChange}
-                    value={value.email}
+                    value={value.pass}
                 />
-                {error.email && <span>{error.email}</span>}
-                <p>Password</p>
-                <div className='login_form--icon'>
-                    <input type={showPassword ?"password" :"text" } placeholder='Enter your password'
-                     name='pass'
-                     id="toggle-password"
-                        onChange={handleChange}
-                        value={value.pass}
-                    />
-                     {showPassword ? <FaEyeSlash  onClick={handleTogglePassword}/> : <FaEye onClick={handleTogglePassword} />}
-                </div>
-                {error.pass && <span>{error.pass}</span>} <br />
-                <span>{
-                    Object.keys(error).length === 1 && errorButton
-                }</span> <br />
-                <Link to='/reset'>Forget passsword</Link> <br />
-                <button type="submit" onClick={handleSubmit} disabled={isSubmitting}>
-                    {isSubmitting ? 'Đang đăng nhập...' : 'Đăng nhập'}
-                </button>
-                <div className="login_gignup">
-                    <p>Don't have an account ? <Link to='/signup'>Sign up</Link></p>
-                </div>
-            </form>
-        </div>
-    )
+                {showPassword ? <FaEyeSlash onClick={handleTogglePassword} /> : <FaEye onClick={handleTogglePassword} />}
+            </div>
+            {error.pass && <span>{error.pass}</span>} <br />
+            <span>{
+                Object.keys(error).length === 1 && errorButton
+            }</span> <br />
+            <Link to='/reset'>Forget passsword</Link> <br />
+            <button type="submit" onClick={handleSubmit} disabled={isSubmitting}>
+                {isSubmitting ? 'Đang đăng nhập...' : 'Đăng nhập'}
+            </button>
+            <div className="login_gignup">
+                <p>Don't have an account ? <Link to='/signup'>Sign up</Link></p>
+            </div>
+        </form>
+    </div>
+)
 }
 export default Login

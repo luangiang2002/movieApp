@@ -1,6 +1,6 @@
 
 import { request, } from "../../rapidApi/api"
-import {  CHANNEL_VIDEO_FAIL, CHANNEL_VIDEO_REQUEST, CHANNEL_VIDEO_SUCCESS, COMMENT_LIST_FAIL, COMMENT_LIST_REQUEST, COMMENT_LIST_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCH_VIDEO_FAIL, SEARCH_VIDEO_REQUEST, SEARCH_VIDEO_SUCCESS, VIDEO_DETAILS_FAIL, VIDEO_DETAILS_REQUEST, VIDEO_DETAILS_SUCCESS } from "../actionType"
+import { CHANNEL_VIDEO_FAIL, CHANNEL_VIDEO_REQUEST, CHANNEL_VIDEO_SUCCESS, COMMENT_LIST_FAIL, COMMENT_LIST_REQUEST, COMMENT_LIST_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCH_VIDEO_FAIL, SEARCH_VIDEO_REQUEST, SEARCH_VIDEO_SUCCESS, VIDEO_DETAILS_FAIL, VIDEO_DETAILS_REQUEST, VIDEO_DETAILS_SUCCESS } from "../actionType"
 
 
 export const getVideoByCategory = (keyword) => async (dispatch) => {
@@ -14,7 +14,6 @@ export const getVideoByCategory = (keyword) => async (dispatch) => {
                 part: 'snippet,id',
                 regionCode: 'US',
                 maxResults: '50',
-                order: 'date'
             },
         }
         )
@@ -22,7 +21,6 @@ export const getVideoByCategory = (keyword) => async (dispatch) => {
             type: SEARCH_VIDEO_SUCCESS,
             payload: {
                 video: res.data.items,
-                category: 'Tất cả',
                 ActiveCategory: keyword
 
             }
@@ -46,7 +44,6 @@ export const getVideoWatch = (id) => async (dispatch) => {
             params: {
                 channelId: id,
                 part: 'snippet,id',
-                order: 'date',
                 maxResults: '50'
             },
         }
@@ -81,7 +78,6 @@ export const getComment = (id) => async (dispatch) => {
             },
         }
         )
-        // console.log(res);
         dispatch({
             type: COMMENT_LIST_SUCCESS,
             payload: {
@@ -89,7 +85,6 @@ export const getComment = (id) => async (dispatch) => {
 
             }
         })
-        // console.log(res)
     } catch (error) {
         console.log(error)
         dispatch({
@@ -141,7 +136,7 @@ export const getVideoAction = (id) => async (dispatch) => {
                 type: 'video',
                 part: 'snippet',
                 maxResults: '40'
-              }
+            }
         }
         )
         // console.log(res);
@@ -156,6 +151,36 @@ export const getVideoAction = (id) => async (dispatch) => {
         console.log(error)
         dispatch({
             type: VIDEO_DETAILS_FAIL,
+            payload: error.message
+        })
+    }
+}
+
+
+export const getChannel = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: CHANNEL_VIDEO_REQUEST,
+        })
+        const res = await request.get(`/channels`, {
+            params: {
+                part: 'snippet,statistics',
+                id: id
+            }
+        }
+        )
+        // console.log(res);
+        dispatch({
+            type: CHANNEL_VIDEO_SUCCESS,
+            payload: {
+                channel: res.data.items,
+
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        dispatch({
+            type: CHANNEL_VIDEO_FAIL,
             payload: error.message
         })
     }

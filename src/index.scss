@@ -26,3 +26,56 @@ $breakpoints-small:576px;
 $breakpoints-lg:768px;
 $breakpoint-medium:1224px;
 $breakpoint-xl:1440px;
+
+.dark-mode {
+    background-color: #333 !important;
+    color:white !important;
+  }
+  .dark-mode .pagevideo_video--detail div p {
+    color: white;
+  }
+  .dark-mode .pagevideo_video--detail div h4 {
+    color: white;
+  }
+  .dark-mode .nextvideo_video--detail div p {
+    color: white;
+  }
+  .dark-mode .nextvideo_video--detail div h4 {
+    color: white;
+  }
+  .dark-mode .video p {
+    color: white;
+  }
+  .dark-mode .header {
+    color: white;
+    background-color: black;
+  }
+  .dark-mode .toggle_toggleSidebar   {
+    color: white;
+    background-color: black;
+  }
+  .dark-mode .avatar   {
+    color: white;
+    background-color: black;
+  }
+  .dark-mode .input   {
+    color: white;
+  }
+  .dark-mode .header_search button svg   {
+    color: white;
+  }
+  .dark-mode .header_search  {
+   border: 2px solid white;
+  }
+  .dark-mode .toggle_toggleSidebar div:hover  {
+   color: black;
+  }
+  .dark-mode .toggle_toggleSidebar div svg:hover  {
+   color: white;
+  }
+  .dark-mode .search_video--detail div h4  {
+   color: white;
+  }
+  .dark-mode .search_video--detail div p  {
+   color: white;
+  }

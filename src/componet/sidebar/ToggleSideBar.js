@@ -18,7 +18,7 @@ const ToggleSideBar = ({ sidebar, handleToggleSidebar }) => {
                 onClick={() => handleToggleSidebar(sidebar)}>
                 <div className="toggle_toggleSidebar--logo" >
                     <FaBars onClick={() => handleToggleSidebar(sidebar)} />
-                    <img src="https://png.pngtree.com/template/20191130/ourmid/pngtree-modern-online-movie-logo-template-online-video-logo-designs-vector-illustration-image_337356.jpg" alt="" />
+                    <img src="https://i.ibb.co/s9Qys2j/logo.png" alt="" />
                 </div>
                 <div className="toggle_toggleSidebar--home" onClick={handleHome} >
                     <AiFillHome  onClick={() => handleToggleSidebar(sidebar)}  />

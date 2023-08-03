@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Header from '../header/Header';
 import './search.scss'
-import ToggleSideBar from '../sidebar/ToggleSideBar';
+
 import { Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Search from './video/Search';
@@ -16,11 +15,6 @@ const SearchVideo = ({ handleToggleSidebar, sidebar }) => {
   }, [dispatch, id])
   return (
     <div className='search'>
-      <Row>
-        <Col><Header handleToggleSidebar={handleToggleSidebar} />
-          <ToggleSideBar sidebar={sidebar} handleToggleSidebar={handleToggleSidebar} />
-        </Col>
-      </Row>
       <Row>
         <Col>
           <div className="search_video">
